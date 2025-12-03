@@ -39,7 +39,7 @@ new Solution((s) => {
 
     let passes = 0;
     if (moveBy > 100) {
-      passes = Math.floor(moveBy / 100) - (moveBy % 100 == 0 ? 1 : 0);
+      passes = Math.floor(moveBy / 100) - (newDeg == 0 ? 1 : 0); // we remove 1 because we are landing on 0 not passing it (same as moveBy % 100)
     } else if (moveBy < 0) {
       passes =
         Math.floor(Math.abs(moveBy) / 100) +
