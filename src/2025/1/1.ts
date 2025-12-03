@@ -7,8 +7,8 @@ new Solution((s) => {
 
   for (const instruction of s.input) {
     const op = instruction.slice(0, 1);
-    const diff = +instruction.slice(1);
-    deg = (deg + (op === "L" ? -1 : 1) * diff) % 100;
+    const diff = op === "L" ? -instruction.slice(1) : +instruction.slice(1);
+    deg = (deg + diff) % 100;
     if (deg === 0) s.solution += 1;
   }
 });
@@ -43,8 +43,7 @@ new Solution((s) => {
     } else if (moveBy < 0) {
       passes =
         Math.floor(Math.abs(moveBy) / 100) +
-        1 -
-        (oldDeg == 0 || newDeg == 0 ? 1 : 0);
+        (oldDeg == 0 || newDeg == 0 ? 0 : 1); // we don't add because we are not passing 0, we are landing on it
     }
 
     if (newDeg === 0) s.solution += 1;
