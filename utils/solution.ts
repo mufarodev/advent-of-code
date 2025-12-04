@@ -8,7 +8,10 @@ export class Solution {
   public tests: Array<Array<string>> = [];
   public title = "";
 
-  constructor(public run: RunFunction) {
+  constructor(
+    public run: RunFunction,
+    public customParse?: (input: string[]) => string[],
+  ) {
     this.runAsync();
   }
 
@@ -22,6 +25,9 @@ export class Solution {
 
   private async runAsync() {
     this.input = await readInput();
+    if (this.customParse) {
+      this.input = this.customParse(this.input);
+    }
     const start = performance.now();
     this.run(this);
     const end = performance.now();
